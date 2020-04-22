@@ -1,12 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"sort"
-	"strconv"
-	"strings"
 )
 
 func main() {
@@ -16,25 +12,18 @@ func main() {
 	a := make([]int, 0)
 	b := make([]int, 0)
 
-	reader := bufio.NewReader(os.Stdin)
-	aMembers, _ := reader.ReadString('\n')
-	aMembers = strings.TrimSuffix(aMembers, "\n")
-	bMembers, _ := reader.ReadString('\n')
-	bMembers = strings.TrimSuffix(bMembers, "\n")
-
-	aNumbers := strings.Split(aMembers, " ")
-	bNumbers := strings.Split(bMembers, " ")
-
 	for i := 0; i < n; i++ {
-		ne,_ := strconv.Atoi(aNumbers[i])
-		a = append(a, ne)
+		var new int
+		fmt.Scanf("%d", &new)
+		a = append(a, new)
 	}
 
 	sort.Ints(a)
 
 	for i := 0; i < m; i++ {
-		ne,_ := strconv.Atoi(bNumbers[i])
-		b = append(b, ne)
+		var new int
+		fmt.Scanf("%d", &new)
+		b = append(b, new)
 	}
 
 	sort.Ints(b)
