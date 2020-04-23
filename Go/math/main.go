@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -13,7 +14,7 @@ func main() {
 	l = strings.TrimSuffix(l, "\n")
 	characters := strings.Split(l, "")
 
-	calculate(characters)
+	fmt.Println(calculate(characters))
 }
 
 func calculate(characters []string) string {
@@ -21,9 +22,9 @@ func calculate(characters []string) string {
 	i := 0
 	for ;i < len(characters); {
 		if characters[i] == "(" {
-			end := findEnd(characters)
-			r += calculate(characters[i:end])
-			i = end
+			end := findEnd(characters, i+1)
+			r += calculate(characters[i+1:end])
+			i = end + 1
 		}else {
 			r += characters[i]
 			i++
@@ -33,11 +34,11 @@ func calculate(characters []string) string {
 	return strconv.Itoa(findOperation(r))
 }
 
-func findEnd(characters []string) int {
+func findEnd(characters []string, begin int) int {
 	count := 1
 
-	var i int
-	for i = 1; i < len(characters); i++ {
+	i := begin
+	for ; i < len(characters); i++ {
 		if characters[i] == "("{
 			count++
 		}else if characters[i] == ")" {
@@ -53,15 +54,23 @@ func findEnd(characters []string) int {
 
 func findOperation(statement string) int {
 	chars := strings.Split(statement, "")
-	f,_ := strconv.Atoi(chars[0])
-	s,_ := strconv.Atoi(chars[2])
 
-	switch chars[1] {
-	case "+":
-		return Add(f, s)
-	case "*":
-		return Multiply(f, s)
+	for i := 0; i < len(chars); i++ {
+		switch chars[i] {
+		case "+":
+			f,_ := strconv.Atoi(strings.Join(chars[0:i], ""))
+			s,_ := strconv.Atoi(strings.Join(chars[i+1:], ""))
+			return Add(f, s)
+		case "*":
+			f,_ := strconv.Atoi(strings.Join(chars[0:i], ""))
+			s,_ := strconv.Atoi(strings.Join(chars[i+1:], ""))
+			return Multiply(f, s)
+		}
 	}
+
+	ans,_ := strconv.Atoi(statement)
+
+	return ans
 }
 
 func Add(a int, b int) int {
