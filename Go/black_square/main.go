@@ -10,26 +10,28 @@ import (
 
 func main() {
 	var n, m int
-	fmt.Scanf("%d %d", &n, &m)
-	
+
 	matrix := make([][]int, n)
-	
+
 	reader := bufio.NewReader(os.Stdin)
 
+	l, _ := reader.ReadString('\n')
+	fmt.Sscanf(l, "%d %d", &n, &m)
+
 	for i := 0; i < n; i++ {
-		l,_ := reader.ReadString('\n')
+		l, _ := reader.ReadString('\n')
 		l = strings.TrimSuffix(l, "\n")
 		c := strings.Split(l, "")
 		row := make([]int, n)
-		
+
 		for j := 0; j < n; j++ {
-			cell,_ := strconv.Atoi(c[j])
+			cell, _ := strconv.Atoi(c[j])
 			row[j] = cell
 		}
-		
+
 		matrix[i] = row
 	}
-	
+
 	fmt.Println(find(matrix, m))
 }
 
@@ -50,8 +52,8 @@ func find(matrix [][]int, m int) string {
 }
 
 func check(matrix [][]int, i int, j int, m int) bool {
-	for x := i; x < i + m; x++ {
-		for y := j; y < j + m; y++ {
+	for x := i; x < i+m; x++ {
+		for y := j; y < j+m; y++ {
 			if matrix[x][y] == 0 {
 				return false
 			}
