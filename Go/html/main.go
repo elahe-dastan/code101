@@ -10,7 +10,7 @@ import (
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 	l, _ := reader.ReadString('\n')
-	characters := []rune(strings.TrimSuffix(l, "\n"))
+	characters := strings.TrimSuffix(l, "\n")
 
 	b := build(characters)
 
@@ -24,69 +24,13 @@ func main() {
 
 }
 
-func build(characters []rune) []rune {
-	ans := make([]rune, 0)
+func build(characters string) []rune {
+	characters = strings.ReplaceAll(characters, "<down>", "(")
+	characters = strings.ReplaceAll(characters, "</down>", ")")
+	characters = strings.ReplaceAll(characters, "<up>", "{")
+	characters = strings.ReplaceAll(characters, "</up>", "}")
 
-	i := 0
-	for i < len(characters) {
-		if i+7 <= len(characters){
-			if string(characters[i:i+6]) == "<down>" {
-				ans = append(ans, '(')
-				i += 6
-			}else if string(characters[i:i+7]) == "</down>" {
-				ans = append(ans, ')')
-				i += 7
-			}else if string(characters[i:i+4]) == "<up>" {
-				i += 4
-				ans = append(ans, '{')
-			}else if string(characters[i:i+5]) == "</up>" {
-				i += 5
-				ans = append(ans, '}')
-			}else {
-				ans = append(ans, characters[i])
-				i++
-			}
-		}else if i+6 <= len(characters) {
-			if string(characters[i:i+6]) == "<down>" {
-				ans = append(ans, '(')
-				i += 6
-			}else if string(characters[i:i+4]) == "<up>" {
-				i += 4
-				ans = append(ans, '{')
-			}else if string(characters[i:i+5]) == "</up>" {
-				i += 5
-				ans = append(ans, '}')
-			}else {
-				ans = append(ans, characters[i])
-				i++
-			}
-		}else if i+5 <= len(characters) {
-			if string(characters[i:i+4]) == "<up>" {
-				i += 4
-				ans = append(ans, '{')
-			}else if string(characters[i:i+5]) == "</up>" {
-				i += 5
-				ans = append(ans, '}')
-			}else {
-				ans = append(ans, characters[i])
-				i++
-			}
-		}else if i+4 <= len(characters) {
-			if string(characters[i:i+4]) == "<up>" {
-				i += 4
-				ans = append(ans, '{')
-			}else {
-				ans = append(ans, characters[i])
-				i++
-			}
-		}else {
-			ans = append(ans, characters[i])
-			i++
-		}
-
-	}
-
-	return ans
+	return []rune(characters)
 }
 
 func valid(characters []rune) bool {
