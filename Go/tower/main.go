@@ -50,80 +50,84 @@ func main() {
 		boxes[i] = row
 	}
 
-	fmt.Printf("%d %d", highest+d, build(boxes, tallests, d, highest))
+	fmt.Printf("%d %d", highest+d, build(boxes, tallests, d, highest, n, m))
 }
 
-func build(boxes [][]int, tallests []int, d int, highest int) int {
+func build(boxes [][]int, tallests []int, d int, highest int, n int, m int) int {
 	passedDays := 0
-	for {
-		for k := 0; k < len(tallests); k++{
-			if tallests[k] < highest {
-				var diff int
-				if highest - tallests[k] < d - passedDays {
-					diff = highest - tallests[k]
-				}else {
-					diff = d - passedDays
-				}
+	for k := 0; k < len(tallests); k++{
+		if tallests[k] < highest {
+			var diff int
+			if highest - tallests[k] < d - passedDays {
+				diff = highest - tallests[k]
+			}else {
+				diff = d - passedDays
+			}
 
-				row := boxes[k]
-				for i := 0; i < len(row); i++ {
+			row := boxes[k]
+			for i := 0; i < len(row); i++ {
+				row[i] += diff
+			}
+			tallests[k]+=diff
+
+			for ghabli := k - len(boxes[0]) + 1; ghabli < k; ghabli++ {
+				if ghabli < 0 {
+					continue
+				}
+				row = boxes[ghabli]
+				tallest := tallests[ghabli]
+				for i := k - ghabli; i < len(row); i++ {
 					row[i] += diff
+					if row[i] > tallest {
+						tallest = row[i]
+					}
 				}
-				tallests[k]+=diff
+				tallests[ghabli] = tallest
 
-				for ghabli := k - len(boxes[0]) + 1; ghabli < k; ghabli++ {
-					if ghabli < 0 {
-						continue
-					}
-					row = boxes[ghabli]
-					tallest := tallests[ghabli]
-					for i := k - ghabli; i < len(row); i++ {
-						row[i] += diff
-						if row[i] > tallest {
-							tallest = row[i]
-						}
-					}
-					tallests[ghabli] = tallest
-
-				}
-
-				for badi := k + 1; badi < k + len(boxes[0]); badi++ {
-					if badi == len(boxes) {
-						break
-					}
-					row = boxes[badi]
-					tallest := tallests[badi]
-					for i := 0; i < len(row) - (badi - k); i++ {
-						row[i] += diff
-						if row[i] > tallest {
-							tallest = row[i]
-						}
-					}
-					tallests[badi] = tallest
-
-				}
-
-				passedDays += diff
 			}
 
-			if passedDays == d {
-				break
+			for badi := k + 1; badi < k + len(boxes[0]); badi++ {
+				if badi == len(boxes) {
+					break
+				}
+				row = boxes[badi]
+				tallest := tallests[badi]
+				for i := 0; i < len(row) - (badi - k); i++ {
+					row[i] += diff
+					if row[i] > tallest {
+						tallest = row[i]
+					}
+				}
+				tallests[badi] = tallest
+
 			}
+
+			passedDays += diff
 		}
 
 		if passedDays == d {
-			break
-		}
-		highest++
-	}
-	tallest := 0
-	for i := 0; i < len(tallests); i++ {
-		if tallests[i] > tallest {
-			tallest = tallests[i]
+			tallest := 0
+			for i := 0; i < len(tallests); i++ {
+				if tallests[i] > tallest {
+					tallest = tallests[i]
+				}
+			}
+
+			return tallest
 		}
 	}
 
-	return tallest
+	packages := n/m
+	leftDays := d - passedDays
+
+	var additional int
+	if leftDays%packages == 0 {
+		additional = leftDays / packages
+	}else {
+		additional = leftDays/packages + 1
+	}
+
+	return tallests[0] + additional
 }
 
 func findShortest(boxes [][]int, tallests []int, shortestTallestIndex int, d int) int {
