@@ -10,7 +10,7 @@ char *change(char input[50]) {
         count++;
     }
 
-    output= (char*)malloc((count + 2));
+    output= (char*)malloc((count + 2) * sizeof(char));
 
     end = count - 1;
 
@@ -24,10 +24,22 @@ char *change(char input[50]) {
     output[begin] = 'a';
     output[begin+1] = '\0';
 
-    return (char*)output;
+    return output;
 }
 
 int main() {
-    printf("%s", change("hello"));
+    FILE *fptr, *fw;
+    char str[50];
+    char c;
+    fptr = fopen("/home/elahe/Desktop/letter.txt", "r");
+    fw   = fopen("home/elahe/Desktop/new.txt", "w");
+    
+    int count = 0;
+    while (fscanf(fptr, "%50s", str) == 1) {
+        fprintf(fw,"%s ", change(str));
+    }
+
+    fclose(fptr);
+    fclose(fw);
     return 0;
 }
