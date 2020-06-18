@@ -30,11 +30,9 @@ char *change(char input[50]) {
 int main() {
     FILE *fptr, *fw;
     char str[50];
-    char c;
     fptr = fopen("/home/elahe/Desktop/letter.txt", "r");
-    fw   = fopen("home/elahe/Desktop/new.txt", "w");
-    
-    int count = 0;
+    fw   = fopen("/home/elahe/Desktop/new.txt", "w");
+
     while (fscanf(fptr, "%50s", str) == 1) {
         fprintf(fw,"%s ", change(str));
     }
