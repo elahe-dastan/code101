@@ -42,24 +42,17 @@ type ListNode struct {
 }
 
 var carry = 0
-var first = true
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	result := &ListNode{}
-	tail := &ListNode{}
+	head := result
 
 	for {
 		if l1 == nil && l2 == nil {
 			break
 		}else {
-			if first {
-				result = addDigit(l1, l2)
-				result.Next = tail
-				first = false
-			}else {
-				tail = addDigit(l1, l2)
-				tail = tail.Next
-			}
+			result = addDigit(l1, l2)
+			result = result.Next
 
 			if l1 != nil {
 				l1 = l1.Next
@@ -70,7 +63,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 	}
 
-	return result
+	return head
 }
 
 func addDigit(l1 *ListNode, l2 *ListNode) *ListNode {
