@@ -4,25 +4,13 @@ import "fmt"
 
 func main() {
 	l1 := &ListNode {
-		2,
-		&ListNode{
-			4,
-			&ListNode{
-				3,
-				nil,
-			},
-		},
+		5,
+		nil,
 	}
 
 	l2 := &ListNode {
 		5,
-		&ListNode{
-			6,
-			&ListNode{
-				4,
-				nil,
-			},
-		},
+		nil,
 	}
 
 	r := addTwoNumbers(l1, l2)
@@ -48,7 +36,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	head := result
 
 	for {
-		if l1 == nil && l2 == nil {
+		if l1 == nil && l2 == nil && carry == 0 {
 			break
 		}else {
 			result.Next = addDigit(l1, l2)
