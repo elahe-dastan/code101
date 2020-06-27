@@ -51,7 +51,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		if l1 == nil && l2 == nil {
 			break
 		}else {
-			result = addDigit(l1, l2)
+			result.Next = addDigit(l1, l2)
 			result = result.Next
 
 			if l1 != nil {
@@ -63,7 +63,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 	}
 
-	return head
+	return head.Next
 }
 
 func addDigit(l1 *ListNode, l2 *ListNode) *ListNode {
