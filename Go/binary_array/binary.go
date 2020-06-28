@@ -17,12 +17,10 @@ func main() {
 				ones = 0
 			}
 		}
+	}
 
-		if i == len(binary) - 1 {
-			if ones > max {
-				max = ones
-			}
-		}
+	if ones > max {
+		max = ones
 	}
 
 	fmt.Println(max)
