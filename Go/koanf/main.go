@@ -13,11 +13,11 @@ import (
 // Global koanf instance. Use "." as the key path delimiter. This can be "/" or any character.
 var k = koanf.New(".")
 
-type elahe struct {
-	name      string `koanf:"name"`
-	age       string `koanf:"age"`
-	boyfriend struct {
-		kind string `koanf:"kind"`
+type Elahe struct {
+	Name      string `koanf:"name"`
+	Age       string `koanf:"age"`
+	Boyfriend struct {
+		Kind string `koanf:"kind"`
 	} `koanf:"boyfriend"`
 }
 
@@ -43,7 +43,7 @@ func main() {
 		}
 	})
 
-	var out elahe
+	var out Elahe
 	if err := k.Unmarshal("", &out); err != nil{
 		log.Fatal(err)
 	}
@@ -52,7 +52,7 @@ func main() {
 
 }
 
-func check(out elahe) {
+func check(out Elahe) {
 	fmt.Println(out)
 	//block forever
 	<-make(chan bool)
