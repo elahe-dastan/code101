@@ -45,4 +45,26 @@ private key is also derived from the same two prime numbers. So if somebody can 
 key is compromised. Therefore, encryption strength totally lies on the key size and if we double or triple the key size, 
 the strength of encryption increases exponentially. RSA keys can be typically 1024 or 2048 bits long.
 
+## SHA-256
+SHA-256 is a hash function that transforms any text to a 32-byte string. A hash is not encryption because it cannot be 
+decrypted back to the original text. It is a one-way cryptographic function, and is a fixed size for any size of source 
+text. Hashing is used in cases like `challenge handshake authentication`, `anti-tamper` and `digital signatures`. Note
+that hash functions are not appropriate for storing encrypted passwords, as they are designed to be fast to compute, and 
+hence would be candidates for brute-force attacks.
 
+## JWT
+### Authorization vs Authentication
+In authentication, you get a username and password and authenticate that they are correct. It's like logging a user in 
+but in authorization you want to make sure that the user that sends request to your server is the same user who logged in
+during authentication.
+### JWT vs SessionId
+Long time ago, people would use session ids for authorization. After logging in, the server would generate a unique id
+for the user, keeps the id in the memory and give it to the user, the user keeps the id in its cookies and sends it back
+to the server whenever it has another request, the server then checks for the id in its memory. This approach has two 
+significant disadvantages, first, a lot of memory should be used in the server side to store the session ids, second,
+if you want to have several servers to increase high availability of your application, the servers should share their 
+memory which is not always the case. Nowadays, when a user logs in, the server creates a json web token(JWT), it actually
+encodes information and signs it with its own secret key then sends the token to the client, the client will send back the 
+token to the server in case of any new request, and the server can verify the JWT token, so you see, nothing needs to be 
+stored in the server side.
+### How JWT Works
