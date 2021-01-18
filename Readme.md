@@ -16,4 +16,9 @@ instagram bio. A message encrypted by a private key can be decrypted by its publ
 public key can be decrypted by its private key so if a person picks up your public key from your bio, writes a message and
 encrypt it using the key no one can decrypt the message but you
 
+## Digital Certificates
+Now let's talk about a real situation suppose you see a pair of sneakers on Amazon and want to order them, to pay for them
+you give all the information of your credit card and not worry at all, clearly there is an asymmetric cryptography, you 
+encrypt your information by a public key and only the Amazon site has the private key and is able to decrypt but when did
+you get the public key?!! That's why we need digital certificates like SSL and TLS. 
 
