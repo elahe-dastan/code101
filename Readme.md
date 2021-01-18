@@ -36,3 +36,13 @@ by both parties and starts a secure session using these methods.There are a good
 4. To guarantee the integrity and authenticity of all messages transferred, SSL and TLS protocols also include an 
    authentication process using message authentication codes(MAC).
    
+## RSA
+Up to here, I have not said a word about how the encryption, and the decryption is done. Well, there are many algorithms 
+but one of the most famous ones is RSA. As you can guess, RSA is asymmetric. You can easily find the algorithm 
+implementation on Google here I only mention the idea. The idea of RSA is based on the fact that it is difficult to factorize 
+a large integer. The public key consists of two numbers where one number is multiplication of two large prime numbers and 
+private key is also derived from the same two prime numbers. So if somebody can factorize the large number, the private 
+key is compromised. Therefore, encryption strength totally lies on the key size and if we double or triple the key size, 
+the strength of encryption increases exponentially. RSA keys can be typically 1024 or 2048 bits long.
+
+
