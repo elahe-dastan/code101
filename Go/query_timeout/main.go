@@ -1,6 +1,7 @@
 package main
 
 import (
+	//"context"
 	"database/sql"
 	"fmt"
 	"log"
@@ -51,12 +52,24 @@ func main() {
 	//}
 
 	// execution time
+	//ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
+	//defer cancel()
 	start := time.Now()
-	_, err = db.Query("SELECT * FROM parham;")
+	//rows, err := db.QueryContext(ctx,"SELECT * FROM parham;")
+	rows := db.QueryRow("SELECT count(*) FROM parham;")
 	end := time.Now()
-	if err != nil{
-		log.Fatal(err)
-	}
+	//if err != nil{
+	//	log.Fatal(err)
+	//}
 
 	fmt.Println(end.Sub(start))
+
+	for rows.Next() {
+		var id int
+		var name string
+		if err := rows.Scan(&id, );err != nil{
+			log.Fatal(err)
+		}
+		fmt.Println(id)
+	}
 }
