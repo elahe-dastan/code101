@@ -7,8 +7,8 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/golang-migrate/migrate"
-	"github.com/golang-migrate/migrate/database/mysql"
+	//"github.com/golang-migrate/migrate"
+	//"github.com/golang-migrate/migrate/database/mysql"
 	_ "github.com/golang-migrate/migrate/source/file"
 )
 
@@ -24,32 +24,31 @@ func main() {
 	// executing
 	defer db.Close()
 
-	driver, err := mysql.WithInstance(db, &mysql.Config{})
-	if err != nil{
-		log.Fatal(err)
-	}
-
-	m, err := migrate.NewWithDatabaseInstance(
-		"file://migrations/create_table.up.sql",
-		"parham",
-		driver,
-	)
-	if err != nil{
-		fmt.Println("a")
-		log.Fatal(err)
-	}
-
-	if err := m.Up(); err != nil{
-		log.Fatal(err)
-	}
+	//driver, err := mysql.WithInstance(db, &mysql.Config{})
+	//if err != nil{
+	//	log.Fatal(err)
+	//}
+	//
+	//m, err := migrate.NewWithDatabaseInstance(
+	//	"file://migrations",
+	//	"parham",
+	//	driver,
+	//)
+	//if err != nil{
+	//	log.Fatal(err)
+	//}
+	//
+	//if err := m.Up(); err != nil{
+	//	log.Fatal(err)
+	//}
 
 	// fill the table with data
-	for i := 0; i < 1000; i++ {
-		_, err := db.Exec("INSERT INTO parham VALUES (?, parham);", i)
-		if err != nil{
-			log.Fatal(err)
-		}
-	}
+	//for i := 1000; i < 5000; i++ {
+	//	_, err := db.Exec("INSERT INTO parham VALUES (?, 'parham');", i)
+	//	if err != nil{
+	//		log.Fatal(err)
+	//	}
+	//}
 
 	// execution time
 	start := time.Now()

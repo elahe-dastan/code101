@@ -15,7 +15,15 @@ CREATE DATABASE [database_name];
 ``` 
 
 ## Fill Database with Data
+## migrations
+the files should be created automatically
+
 to check if the timeout constraint works or not se should have a select query that takes long, so I have to fill the table 
 with data. There are plenty of ways to do this and you can choose the one which is the easiest for you, I tried writing 
 a small golang code.
+
+## set constraint
+### in query
+SELECT /*+ MAX_EXECUTION_TIME(1) */ * FROM parham;
+
  
