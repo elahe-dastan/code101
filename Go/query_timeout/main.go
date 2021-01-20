@@ -2,16 +2,19 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
+	"log"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/golang-migrate/migrate"
 	"github.com/golang-migrate/migrate/database/mysql"
-	"log"
+	_ "github.com/golang-migrate/migrate/source/file"
 )
 
 func main() {
 	// Open up our database connection.
 	//db, err := sql.Open("mysql", "username:password@tcp(127.0.0.1:3306)/test")
-	db, err := sql.Open("mysql", "root:parham@tcp(127.0.0.1:3306)")
+	db, err := sql.Open("mysql", "root:parham@tcp(127.0.0.1:3306)/parham")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -27,13 +30,16 @@ func main() {
 
 	m, err := migrate.NewWithDatabaseInstance(
 		"file://create_table.sql",
-		"",
+		"parham",
 		driver,
 	)
 	if err != nil{
+		fmt.Println("a")
 		log.Fatal(err)
 	}
 
-	m.Steps(2)
+	if err := m.Up(); err != nil{
+		log.Fatal(err)
+	}
 
 }
