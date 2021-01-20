@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/golang-migrate/migrate"
@@ -29,7 +30,7 @@ func main() {
 	}
 
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://create_table.sql",
+		"file://migrations/create_table.up.sql",
 		"parham",
 		driver,
 	)
@@ -42,4 +43,21 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// fill the table with data
+	for i := 0; i < 1000; i++ {
+		_, err := db.Exec("INSERT INTO parham VALUES (?, parham);", i)
+		if err != nil{
+			log.Fatal(err)
+		}
+	}
+
+	// execution time
+	start := time.Now()
+	_, err = db.Query("SELECT * FROM parham;")
+	end := time.Now()
+	if err != nil{
+		log.Fatal(err)
+	}
+
+	fmt.Println(end.Sub(start))
 }
