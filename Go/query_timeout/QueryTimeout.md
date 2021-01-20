@@ -6,4 +6,11 @@ First of all, we need a mySQL database to put our constraint on.
 ```shell script
 docker pull mysql #pull mysql image 
 docker run --name [container_name] -p [open_port]:3306 -e MYSQL_ROOT_PASSWORD=[root_password] -d mysql 
+docker exec -it [container_name] /bin/bash # get the bash of container
 ```
+
+## Fill Database with Data
+to check if the timeout constraint works or not se should have a select query that takes long, so I have to fill the table 
+with data. There are plenty of ways to do this and you can choose the one which is the easiest for you, I tried writing 
+a small golang code.
+ 
