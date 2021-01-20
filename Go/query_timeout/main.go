@@ -26,7 +26,7 @@ func main() {
 	}
 
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://insert_data.sql",
+		"file://create_table.sql",
 		"",
 		driver,
 	)

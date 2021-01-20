@@ -8,6 +8,11 @@ docker pull mysql #pull mysql image
 docker run --name [container_name] -p [open_port]:3306 -e MYSQL_ROOT_PASSWORD=[root_password] -d mysql 
 docker exec -it [container_name] /bin/bash # get the bash of container
 ```
+inside the bash of the container, run below commands
+```shell script
+mysql -uroot -p # connect to mysql server
+CREATE DATABASE [database_name];
+``` 
 
 ## Fill Database with Data
 to check if the timeout constraint works or not se should have a select query that takes long, so I have to fill the table 
