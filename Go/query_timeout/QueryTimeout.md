@@ -1,6 +1,12 @@
 # MySQL Query Timeout
 I once wondered if I can put a timeout constraint on my SQL queries and YES, here is the process if you want to try it too.
 
+# Table of Content
+ Markup : 1. A numbered list
+              1. A nested numbered list
+              2. Which is numbered
+          2. Which is numbered
+
 ## MySQL database
 First of all, we need a mySQL database to put our constraint on.
 ```shell script
@@ -37,5 +43,3 @@ of the rows and cause there are no errors you think you have fetched all the tab
 use context. BUT what if there is a constraint on the mysql server itself??
 Usually the max execution time of a mysql server is too high that no one ever hits it but if the were a tight constrait
 there are two ways, first, each query should have context with the same timeout, second 
-
- 

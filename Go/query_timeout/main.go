@@ -5,6 +5,8 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+
+	//"log"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -56,7 +58,7 @@ func main() {
 	//defer cancel()
 	start := time.Now()
 	//rows, err := db.QueryContext(ctx,"SELECT * FROM parham;")
-	rows := db.QueryRow("SELECT count(*) FROM parham;")
+	row := db.QueryRow("SELECT count(*) FROM parham;")
 	end := time.Now()
 	//if err != nil{
 	//	log.Fatal(err)
@@ -64,10 +66,18 @@ func main() {
 
 	fmt.Println(end.Sub(start))
 
+	var count int
+	fmt.Println(row.Scan(&count))
+	fmt.Println(count)
+
+	rows, err := db.Query("SELECT * FROM parham;")
+	if err != nil {
+		log.Fatal(err)
+	}
 	for rows.Next() {
 		var id int
 		var name string
-		if err := rows.Scan(&id, );err != nil{
+		if err := rows.Scan(&id, &name);err != nil{
 			log.Fatal(err)
 		}
 		fmt.Println(id)
