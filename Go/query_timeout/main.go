@@ -1,17 +1,11 @@
 package main
 
 import (
-	//"context"
 	"database/sql"
 	"fmt"
 	"log"
 
-	//"log"
-	"time"
-
 	_ "github.com/go-sql-driver/mysql"
-	//"github.com/golang-migrate/migrate"
-	//"github.com/golang-migrate/migrate/database/mysql"
 	_ "github.com/golang-migrate/migrate/source/file"
 )
 
@@ -45,8 +39,8 @@ func main() {
 	//	log.Fatal(err)
 	//}
 
-	// fill the table with data
-	//for i := 1000; i < 5000; i++ {
+	//fill the table with data
+	//for i := 0; i < 5000; i++ {
 	//	_, err := db.Exec("INSERT INTO parham VALUES (?, 'parham');", i)
 	//	if err != nil{
 	//		log.Fatal(err)
@@ -56,21 +50,21 @@ func main() {
 	// execution time
 	//ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
 	//defer cancel()
-	start := time.Now()
-	//rows, err := db.QueryContext(ctx,"SELECT * FROM parham;")
-	row := db.QueryRow("SELECT count(*) FROM parham;")
-	end := time.Now()
+	//start := time.Now()
+	//_, err = db.QueryContext(ctx,"SELECT * FROM parham;")
+	//row := db.QueryRow("SELECT count(*) FROM parham;")
+	//end := time.Now()
 	//if err != nil{
 	//	log.Fatal(err)
 	//}
 
-	fmt.Println(end.Sub(start))
+	//fmt.Println(end.Sub(start))
+	//
+	//var count int
+	//fmt.Println(row.Scan(&count))
+	//fmt.Println(count)
 
-	var count int
-	fmt.Println(row.Scan(&count))
-	fmt.Println(count)
-
-	rows, err := db.Query("SELECT * FROM parham;")
+	rows, err := db.Query("SELECT * from parham;")
 	if err != nil {
 		log.Fatal(err)
 	}
