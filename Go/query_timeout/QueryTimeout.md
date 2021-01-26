@@ -233,3 +233,15 @@ SET GLOBAL MAX_EXECUTION_TIME=[time];
 confuse you.Suppose you have a session to your mysql server and want to put a `GLOBAL` constraint on it after setting the
 constraint, it is not applied to the current session if you close the current connection and open a new one you see that 
 everything works fine and as expected.
+
+## Update
+Now let's see how we can put timeout constraint on database query when we're using sqlx or gorm(both slqx and gorm are 
+popular libraries for communication with database in golang)
+
+## SQLX
+Everything I said about SQL **remains exactly the same** for this part. So you can both put `/*+ MAX_EXECUTION_TIME([time]) */`
+inside the query or use `QueryxContext`.
+
+## Gorm
+In gorm version 2 you can put timeout constraint on queries using `WithContext` but in Version 1 the only way you can do 
+it is by using transactions 
