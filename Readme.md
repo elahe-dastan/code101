@@ -68,3 +68,7 @@ encodes information and signs it with its own secret key then sends the token to
 token to the server in case of any new request, and the server can verify the JWT token, so you see, nothing needs to be 
 stored in the server side.
 ### How JWT Works
+JWT has three distinct parts. It has a header that contains the algorithm which is used for encoding, payload which is all
+the information stored and lastly signature which let us verify that the token hasn't been changed before it gets sent back
+to us. Take a look at ![jwt.io](jwt.io), you can see encoded and decoded of a JWT token. As you can see the three parts 
+are separated from each other by period.
