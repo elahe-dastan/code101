@@ -245,3 +245,7 @@ inside the query or use `QueryxContext`.
 ## Gorm
 In gorm version 2 you can put timeout constraint on queries using `WithContext` but in Version 1 the only way you can do 
 it is by using transactions 
+
+migrate in terminal example<br/>
+migrate -path "migrations dir" -database "driver://dsn" command
+migrate -path . -database postgres://postgres:parham@172.17.0.2:5432/parham?sslmode=disable up
