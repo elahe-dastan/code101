@@ -12,70 +12,98 @@ import "testing"
 // It does NOT run each operation group in parallel.
 // Separating the tests thusly grants avoidance of Postgres deadlocks.
 func TestParent(t *testing.T) {
-	t.Run("Parhams", testParhams)
+	t.Run("Jets", testJets)
+	t.Run("Languages", testLanguages)
+	t.Run("Pilots", testPilots)
 	t.Run("SchemaMigrations", testSchemaMigrations)
 }
 
 func TestDelete(t *testing.T) {
-	t.Run("Parhams", testParhamsDelete)
+	t.Run("Jets", testJetsDelete)
+	t.Run("Languages", testLanguagesDelete)
+	t.Run("Pilots", testPilotsDelete)
 	t.Run("SchemaMigrations", testSchemaMigrationsDelete)
 }
 
 func TestQueryDeleteAll(t *testing.T) {
-	t.Run("Parhams", testParhamsQueryDeleteAll)
+	t.Run("Jets", testJetsQueryDeleteAll)
+	t.Run("Languages", testLanguagesQueryDeleteAll)
+	t.Run("Pilots", testPilotsQueryDeleteAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsQueryDeleteAll)
 }
 
 func TestSliceDeleteAll(t *testing.T) {
-	t.Run("Parhams", testParhamsSliceDeleteAll)
+	t.Run("Jets", testJetsSliceDeleteAll)
+	t.Run("Languages", testLanguagesSliceDeleteAll)
+	t.Run("Pilots", testPilotsSliceDeleteAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsSliceDeleteAll)
 }
 
 func TestExists(t *testing.T) {
-	t.Run("Parhams", testParhamsExists)
+	t.Run("Jets", testJetsExists)
+	t.Run("Languages", testLanguagesExists)
+	t.Run("Pilots", testPilotsExists)
 	t.Run("SchemaMigrations", testSchemaMigrationsExists)
 }
 
 func TestFind(t *testing.T) {
-	t.Run("Parhams", testParhamsFind)
+	t.Run("Jets", testJetsFind)
+	t.Run("Languages", testLanguagesFind)
+	t.Run("Pilots", testPilotsFind)
 	t.Run("SchemaMigrations", testSchemaMigrationsFind)
 }
 
 func TestBind(t *testing.T) {
-	t.Run("Parhams", testParhamsBind)
+	t.Run("Jets", testJetsBind)
+	t.Run("Languages", testLanguagesBind)
+	t.Run("Pilots", testPilotsBind)
 	t.Run("SchemaMigrations", testSchemaMigrationsBind)
 }
 
 func TestOne(t *testing.T) {
-	t.Run("Parhams", testParhamsOne)
+	t.Run("Jets", testJetsOne)
+	t.Run("Languages", testLanguagesOne)
+	t.Run("Pilots", testPilotsOne)
 	t.Run("SchemaMigrations", testSchemaMigrationsOne)
 }
 
 func TestAll(t *testing.T) {
-	t.Run("Parhams", testParhamsAll)
+	t.Run("Jets", testJetsAll)
+	t.Run("Languages", testLanguagesAll)
+	t.Run("Pilots", testPilotsAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsAll)
 }
 
 func TestCount(t *testing.T) {
-	t.Run("Parhams", testParhamsCount)
+	t.Run("Jets", testJetsCount)
+	t.Run("Languages", testLanguagesCount)
+	t.Run("Pilots", testPilotsCount)
 	t.Run("SchemaMigrations", testSchemaMigrationsCount)
 }
 
 func TestHooks(t *testing.T) {
-	t.Run("Parhams", testParhamsHooks)
+	t.Run("Jets", testJetsHooks)
+	t.Run("Languages", testLanguagesHooks)
+	t.Run("Pilots", testPilotsHooks)
 	t.Run("SchemaMigrations", testSchemaMigrationsHooks)
 }
 
 func TestInsert(t *testing.T) {
-	t.Run("Parhams", testParhamsInsert)
-	t.Run("Parhams", testParhamsInsertWhitelist)
+	t.Run("Jets", testJetsInsert)
+	t.Run("Jets", testJetsInsertWhitelist)
+	t.Run("Languages", testLanguagesInsert)
+	t.Run("Languages", testLanguagesInsertWhitelist)
+	t.Run("Pilots", testPilotsInsert)
+	t.Run("Pilots", testPilotsInsertWhitelist)
 	t.Run("SchemaMigrations", testSchemaMigrationsInsert)
 	t.Run("SchemaMigrations", testSchemaMigrationsInsertWhitelist)
 }
 
 // TestToOne tests cannot be run in parallel
 // or deadlocks can occur.
-func TestToOne(t *testing.T) {}
+func TestToOne(t *testing.T) {
+	t.Run("JetToPilotUsingPilot", testJetToOnePilotUsingPilot)
+}
 
 // TestOneToOne tests cannot be run in parallel
 // or deadlocks can occur.
@@ -83,11 +111,17 @@ func TestOneToOne(t *testing.T) {}
 
 // TestToMany tests cannot be run in parallel
 // or deadlocks can occur.
-func TestToMany(t *testing.T) {}
+func TestToMany(t *testing.T) {
+	t.Run("LanguageToPilots", testLanguageToManyPilots)
+	t.Run("PilotToJets", testPilotToManyJets)
+	t.Run("PilotToLanguages", testPilotToManyLanguages)
+}
 
 // TestToOneSet tests cannot be run in parallel
 // or deadlocks can occur.
-func TestToOneSet(t *testing.T) {}
+func TestToOneSet(t *testing.T) {
+	t.Run("JetToPilotUsingJets", testJetToOneSetOpPilotUsingPilot)
+}
 
 // TestToOneRemove tests cannot be run in parallel
 // or deadlocks can occur.
@@ -103,37 +137,57 @@ func TestOneToOneRemove(t *testing.T) {}
 
 // TestToManyAdd tests cannot be run in parallel
 // or deadlocks can occur.
-func TestToManyAdd(t *testing.T) {}
+func TestToManyAdd(t *testing.T) {
+	t.Run("LanguageToPilots", testLanguageToManyAddOpPilots)
+	t.Run("PilotToJets", testPilotToManyAddOpJets)
+	t.Run("PilotToLanguages", testPilotToManyAddOpLanguages)
+}
 
 // TestToManySet tests cannot be run in parallel
 // or deadlocks can occur.
-func TestToManySet(t *testing.T) {}
+func TestToManySet(t *testing.T) {
+	t.Run("LanguageToPilots", testLanguageToManySetOpPilots)
+	t.Run("PilotToLanguages", testPilotToManySetOpLanguages)
+}
 
 // TestToManyRemove tests cannot be run in parallel
 // or deadlocks can occur.
-func TestToManyRemove(t *testing.T) {}
+func TestToManyRemove(t *testing.T) {
+	t.Run("LanguageToPilots", testLanguageToManyRemoveOpPilots)
+	t.Run("PilotToLanguages", testPilotToManyRemoveOpLanguages)
+}
 
 func TestReload(t *testing.T) {
-	t.Run("Parhams", testParhamsReload)
+	t.Run("Jets", testJetsReload)
+	t.Run("Languages", testLanguagesReload)
+	t.Run("Pilots", testPilotsReload)
 	t.Run("SchemaMigrations", testSchemaMigrationsReload)
 }
 
 func TestReloadAll(t *testing.T) {
-	t.Run("Parhams", testParhamsReloadAll)
+	t.Run("Jets", testJetsReloadAll)
+	t.Run("Languages", testLanguagesReloadAll)
+	t.Run("Pilots", testPilotsReloadAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsReloadAll)
 }
 
 func TestSelect(t *testing.T) {
-	t.Run("Parhams", testParhamsSelect)
+	t.Run("Jets", testJetsSelect)
+	t.Run("Languages", testLanguagesSelect)
+	t.Run("Pilots", testPilotsSelect)
 	t.Run("SchemaMigrations", testSchemaMigrationsSelect)
 }
 
 func TestUpdate(t *testing.T) {
-	t.Run("Parhams", testParhamsUpdate)
+	t.Run("Jets", testJetsUpdate)
+	t.Run("Languages", testLanguagesUpdate)
+	t.Run("Pilots", testPilotsUpdate)
 	t.Run("SchemaMigrations", testSchemaMigrationsUpdate)
 }
 
 func TestSliceUpdateAll(t *testing.T) {
-	t.Run("Parhams", testParhamsSliceUpdateAll)
+	t.Run("Jets", testJetsSliceUpdateAll)
+	t.Run("Languages", testLanguagesSliceUpdateAll)
+	t.Run("Pilots", testPilotsSliceUpdateAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsSliceUpdateAll)
 }

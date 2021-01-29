@@ -4,9 +4,15 @@
 package models
 
 var TableNames = struct {
-	Parham           string
+	Jets             string
+	Languages        string
+	PilotLanguages   string
+	Pilots           string
 	SchemaMigrations string
 }{
-	Parham:           "parham",
+	Jets:             "jets",
+	Languages:        "languages",
+	PilotLanguages:   "pilot_languages",
+	Pilots:           "pilots",
 	SchemaMigrations: "schema_migrations",
 }
