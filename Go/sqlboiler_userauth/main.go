@@ -59,5 +59,14 @@ func main() {
 	//fmt.Println(p)
 
 	// DELETE
-	
+	passenger, err := models.Passengers(qm.Where("id = 10")).One(context.Background(), db)
+	if err != nil{
+		log.Fatal(err)
+	}
+
+	rowsAff, err := passenger.Delete(context.Background(), db)
+	if err != nil{
+		log.Fatal(err)
+	}
+	fmt.Println(rowsAff)
 }
