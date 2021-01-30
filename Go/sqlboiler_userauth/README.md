@@ -74,3 +74,15 @@ CREATE TABLE Ride
 ```shell script
 migrate -path . -database mysql://root:parham@tcp"(127.0.0.1:3306)"/parham up
 ```
+
+Now our database is ready, and we want to generate the models using sqlboiler<br/>
+
+4. install sqlboiler as dependency
+```shell script
+go mod init
+go get github.com/volatiletech/sqlboiler/v4
+go get github.com/volatiletech/null/v8
+```
+
+5. sqlboiler needs access to your database to generate the models, and to get the configurations it needs a configuration 
+file
