@@ -106,4 +106,9 @@ sudo apt install mysql-client
 go test ./models
 ```
 
-NOTE: **ANY** capital letter in the name of the table or columns will make trouble 
+NOTE: **ANY** capital letter in the name of the table or columns will cause trouble 
+
+8. CRUD operations "SELECT, INSERT, UPDATE, DELETE"
+
+NOTE: For MySQL if using the github.com/go-sql-driver/mysql driver which is out case we should please time.Time parsing 
+when making MySQL database connection.
