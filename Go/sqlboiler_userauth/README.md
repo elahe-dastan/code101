@@ -85,4 +85,13 @@ go get github.com/volatiletech/null/v8
 ```
 
 5. sqlboiler needs access to your database to generate the models, and to get the configurations it needs a configuration 
-file
+file called sqlboiler.toml (some other extension are ok too)
+```text
+[mysql]
+  dbname  = "dbname"
+  host    = "localhost"
+  port    = 3306
+  user    = "dbusername"
+  pass    = "dbpassword"
+  sslmode = "false"
+```
