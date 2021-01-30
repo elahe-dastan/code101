@@ -1,6 +1,6 @@
 CREATE TABLE Ride
 (
-    ID          int PRIMARY KEY,
-    PassengerID int,
-    FOREIGN KEY (PassengerID) REFERENCES passenger (ID)
+    id          int PRIMARY KEY,
+    passenger_id int,
+    FOREIGN KEY (passenger_id) REFERENCES passenger (id)
 );

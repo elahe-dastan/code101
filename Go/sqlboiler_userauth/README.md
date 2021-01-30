@@ -35,7 +35,7 @@ migrate create -ext sql passenger_table
 ```sql
 CREATE TABLE passenger
 (
-    ID int primary key,
+    id int primary key,
     created_at timestamp,
     updated_at timestamp,
     email varchar(255),
@@ -63,11 +63,11 @@ migrate create -ext sql ride_table
 ```
 
 ```sql
-CREATE TABLE Ride
+CREATE TABLE ride
 (
-    ID          int PRIMARY KEY,
-    PassengerID int,
-    FOREIGN KEY (PassengerID) REFERENCES passenger (ID)
+    id          int PRIMARY KEY,
+    passenger_id int,
+    FOREIGN KEY (passenger_id) REFERENCES passenger (id)
 );
 ```
 
@@ -95,3 +95,15 @@ file called sqlboiler.toml (some other extension are ok too)
   pass    = "dbpassword"
   sslmode = "false"
 ```
+
+6. generate models
+```shell script
+sqlboiler mysql
+```
+7. to check if everything is ok we should run the test but to run them we need mysql-client
+```shell script
+sudo apt install mysql-client
+go test ./models
+```
+
+NOTE: **ANY** capital letter in the name of the table or columns will make trouble 

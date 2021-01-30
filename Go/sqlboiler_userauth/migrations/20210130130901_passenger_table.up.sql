@@ -1,6 +1,6 @@
 CREATE TABLE passenger
 (
-    ID int primary key,
+    id int primary key,
     created_at timestamp,
     updated_at timestamp,
     email varchar(255),
