@@ -72,3 +72,23 @@ JWT has three distinct parts. It has a header that contains the algorithm which 
 the information stored and lastly signature which let us verify that the token hasn't been changed before it gets sent back
 to us. Take a look at ![jwt.io](jwt.io), you can see encoded and decoded of a JWT token. As you can see the three parts 
 are separated from each other by period.
+
+
+# From this point nothing is cohesive
+## Refresh token
+This is the case, you login to an app for example youtube and it gives you back a JWT token so you can access youtube 
+without logging in again and by only using the token but this token is short-lived say 5 minutes and then you need to 
+log in again, wait!, this does not happen!! yep because youtube gives you a short-live JWT token and a long-live refresh 
+token, it keeps the refresh token in its database and whenever the JWT token is expired your client gives the expired JWT 
+token and the refresh token to the youtube server, it validates the JWT token and see it's valid but expired and both checks
+for the refresh token in the database and if everything is ok then it gives you back a new JWT token but what is the difference??
+you could give a long-live JWT well there ARE differences that you can study here I only mention that this is more secure
+because you need both expired JWT and refresh token to get a new one and assume the case that you don't want to let someone
+log in for any reason now the only thing you need to do is to delete the refresh token from the database and the user will
+be logged out after the JWT expiration.
+
+## DoS vs Brute force
+Brute force attacks use a technique of attempting to try every combination of passwords/keys to gain access to a particular 
+system. What the hacker does when they gain entry to the system depends on the motivation of the hacker.<br/>
+DoS (Denial of Service) attacks describe cases where the motivation of the hacker is to bring down the system, causing 
+maximum inconvenience to the users of the system.
