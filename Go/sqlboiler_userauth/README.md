@@ -74,6 +74,10 @@ CREATE TABLE ride
 ```shell script
 migrate -path . -database mysql://root:parham@tcp"(127.0.0.1:3306)"/parham up
 ```
+for postgres:
+```shell
+migrate -path . -database postgres://postgres:postgres@127.0.0.1:5432/sotoon?sslmode="disable" up
+```
 
 Now our database is ready, and we want to generate the models using sqlboiler<br/>
 
