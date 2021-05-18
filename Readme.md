@@ -92,3 +92,4 @@ Brute force attacks use a technique of attempting to try every combination of pa
 system. What the hacker does when they gain entry to the system depends on the motivation of the hacker.<br/>
 DoS (Denial of Service) attacks describe cases where the motivation of the hacker is to bring down the system, causing 
 maximum inconvenience to the users of the system.
+
