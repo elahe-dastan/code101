@@ -34,3 +34,4 @@ func eat(c echo.Context) error {
 // In this piece of code I want to test two things
 // one: the tag code works
 // two: a struct in another one is bound by echo properly
+// curl -X POST -d '{"name": "parham"}' -H 'Content-Type: application/json' '127.0.0.1:1373?type=panda&love=raha'
