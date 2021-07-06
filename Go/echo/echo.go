@@ -14,23 +14,22 @@ func main() {
 
 type Kopol struct {
 	Name string `json:"name"`
-	Nane Nane
 	Love string `query:"love"`
 }
 
-type Nane struct {
-	Type string `query:"type"`
-}
-
-func eat(c echo.Context)  error {
+func eat(c echo.Context) error {
 	var body Kopol
-	err := c.Bind(&body)
-	if err != nil {
-		return err
+
+	if err := (&echo.DefaultBinder{}).BindBody(c, &body); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
+
+	if err := (&echo.DefaultBinder{}).BindQueryParams(c, &body); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
 	return c.JSON(http.StatusOK, body)
 }
-
 
 // In this piece of code I want to test two things
 // one: the tag code works
