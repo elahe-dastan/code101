@@ -8,14 +8,21 @@ import (
 
 func main() {
 	e := echo.New()
-	e.POST("/", eat)
+	e.POST("/eat", eat)
+	e.POST("/sleep", eat)
 	e.Logger.Fatal(e.Start(":1373"))
 }
 
-type Kopol struct {
+type KopolComposite struct {
 	Name string `json:"name"`
 	Nane Nane
 	Love string `query:"love"`
+}
+
+type KopolEmbed struct {
+	Name string `json:"name"`
+	Love string `query:"love"`
+	Nane
 }
 
 type Nane struct {
@@ -23,7 +30,31 @@ type Nane struct {
 }
 
 func eat(c echo.Context)  error {
-	var body Kopol
+	var body KopolComposite
+
+	//err := c.Bind(&body)
+	//if err != nil {
+	//	return err
+	//}
+
+	if err := (&echo.DefaultBinder{}).BindBody(c, &body); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	if err := (&echo.DefaultBinder{}).BindQueryParams(c, &body); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, body)
+}
+
+func sleep(c echo.Context)  error {
+	var body KopolEmbed
+
+	//err := c.Bind(&body)
+	//if err != nil {
+	//	return err
+	//}
 
 	if err := (&echo.DefaultBinder{}).BindBody(c, &body); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
