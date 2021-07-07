@@ -9,7 +9,7 @@ import (
 func main() {
 	e := echo.New()
 	e.POST("/eat", eat)
-	e.POST("/sleep", eat)
+	e.POST("/sleep", sleep)
 	e.Logger.Fatal(e.Start(":1373"))
 }
 
