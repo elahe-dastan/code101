@@ -14,10 +14,15 @@ func main() {
 
 type Kopol struct {
 	Name string `json:"name"`
+	Nane Nane
 	Love string `query:"love"`
 }
 
-func eat(c echo.Context) error {
+type Nane struct {
+	Type string `query:"type"`
+}
+
+func eat(c echo.Context)  error {
 	var body Kopol
 
 	if err := (&echo.DefaultBinder{}).BindBody(c, &body); err != nil {
