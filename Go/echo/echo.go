@@ -15,14 +15,15 @@ func main() {
 
 type KopolComposite struct {
 	Name string `json:"name"`
-	Nane Nane
+	//Nane Nane
 	Love string `query:"love"`
+	Birthday  *int `query:"birthday"`
 }
 
 type KopolEmbed struct {
 	Name string `json:"name"`
 	Love string `query:"love"`
-	Nane
+	//Nane
 }
 
 type Nane struct {
@@ -32,18 +33,18 @@ type Nane struct {
 func eat(c echo.Context)  error {
 	var body KopolComposite
 
-	//err := c.Bind(&body)
-	//if err != nil {
-	//	return err
+	err := c.Bind(&body)
+	if err != nil {
+		return err
+	}
+
+	//if err := (&echo.DefaultBinder{}).BindBody(c, &body); err != nil {
+	//	return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	//}
-
-	if err := (&echo.DefaultBinder{}).BindBody(c, &body); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
-
-	if err := (&echo.DefaultBinder{}).BindQueryParams(c, &body); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
+	//
+	//if err := (&echo.DefaultBinder{}).BindQueryParams(c, &body); err != nil {
+	//	return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	//}
 
 	return c.JSON(http.StatusOK, body)
 }
@@ -51,18 +52,18 @@ func eat(c echo.Context)  error {
 func sleep(c echo.Context)  error {
 	var body KopolEmbed
 
-	//err := c.Bind(&body)
-	//if err != nil {
-	//	return err
+	err := c.Bind(&body)
+	if err != nil {
+		return err
+	}
+
+	//if err := (&echo.DefaultBinder{}).BindBody(c, &body); err != nil {
+	//	return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	//}
-
-	if err := (&echo.DefaultBinder{}).BindBody(c, &body); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
-
-	if err := (&echo.DefaultBinder{}).BindQueryParams(c, &body); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
+	//
+	//if err := (&echo.DefaultBinder{}).BindQueryParams(c, &body); err != nil {
+	//	return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	//}
 
 	return c.JSON(http.StatusOK, body)
 }
