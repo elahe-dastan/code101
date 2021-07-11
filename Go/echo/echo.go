@@ -10,6 +10,7 @@ func main() {
 	e := echo.New()
 	e.POST("/eat", eat)
 	e.POST("/sleep", sleep)
+	e.GET("/surprise", surprise)
 	e.Logger.Fatal(e.Start(":1373"))
 }
 
@@ -24,6 +25,11 @@ type KopolEmbed struct {
 	Name string `json:"name"`
 	Love string `query:"love"`
 	//Nane
+}
+
+type JustQuery struct {
+	Something string `query:"something"`
+	Nane Nane
 }
 
 type Nane struct {
@@ -64,6 +70,17 @@ func sleep(c echo.Context)  error {
 	//if err := (&echo.DefaultBinder{}).BindQueryParams(c, &body); err != nil {
 	//	return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	//}
+
+	return c.JSON(http.StatusOK, body)
+}
+
+func surprise(c echo.Context) error {
+	var body JustQuery
+
+	err := c.Bind(&body)
+	if err != nil {
+		return err
+	}
 
 	return c.JSON(http.StatusOK, body)
 }
