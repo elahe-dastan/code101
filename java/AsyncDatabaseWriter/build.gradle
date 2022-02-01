@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.datastax.cassandra:cassandra-driver-core:3.11.0'
-    implementation 'com.datastax.cassandra:cassandra-driver-mapping:3.11.0'
+    // https://mvnrepository.com/artifact/com.datastax.oss/java-driver-core
+    implementation group: 'com.datastax.oss', name: 'java-driver-core', version: '4.13.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
