@@ -20,3 +20,9 @@ If nr_throttled increases every time you run the command it means your process i
 `python -m venv `
 ## Use the virtual ENV
 `source environment1 /bin/activate`
+
+# SCP
+Using SCP we can transfer file over TCP so it's a fast approach to consider. We need to have SSH connection permission to use SCP.
+
+## Large files
+SCP is a fast approach itself but if your file is so huge even SCP can take so long. To resolve the issue you can **enable compression**, it will be much faster but will also increase CPU usage.
