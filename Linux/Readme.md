@@ -26,3 +26,13 @@ Using SCP we can transfer file over TCP so it's a fast approach to consider. We 
 
 ## Large files
 SCP is a fast approach itself but if your file is so huge even SCP can take so long. To resolve the issue you can **enable compression**, it will be much faster but will also increase CPU usage.
+
+# Subscribe From Nats
+The command
+```shell
+kubectl run nats-box --image=natsio/nats-box:latest --rm -it --restart=Never --command --
+```
+gives you a terminal then run
+```shell
+nats sub -s {your_server} {your_topic}
+```
